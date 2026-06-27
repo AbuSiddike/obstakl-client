@@ -160,7 +160,6 @@ export default function AdminDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Simulate status change offline
       setProperties((prev) =>
         prev.map((p) =>
           p._id === propertyId ? { ...p, status: 'Approved' } : p
@@ -198,7 +197,6 @@ export default function AdminDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Simulate status change offline
       setProperties((prev) =>
         prev.map((p) =>
           p._id === rejectingProperty._id

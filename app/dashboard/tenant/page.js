@@ -341,7 +341,7 @@ export default function TenantDashboard() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {favorites.map((fav) => {
-                  const prop = fav.property || fav; // Support populates details or fallback
+                  const prop = fav.property || fav;
                   return (
                     <div
                       key={fav._id}

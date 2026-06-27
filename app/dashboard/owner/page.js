@@ -200,7 +200,6 @@ export default function OwnerDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Fallback offline simulate add
       const simulated = {
         _id: 'sim-' + Math.random().toString(36).substring(2, 9),
         ...payload,
@@ -254,7 +253,6 @@ export default function OwnerDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Fallback simulate edit
       setProperties((prev) =>
         prev.map((p) =>
           p._id === editingProperty._id
@@ -281,7 +279,6 @@ export default function OwnerDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Fallback simulate delete
       setProperties((prev) => prev.filter((p) => p._id !== id));
       toast.success('Property deleted (Simulated, offline mode).');
     }
@@ -298,7 +295,6 @@ export default function OwnerDashboard() {
       }
     } catch (err) {
       console.error(err);
-      // Fallback simulate status change
       setRequests((prev) =>
         prev.map((r) => (r._id === id ? { ...r, status: newStatus } : r))
       );
@@ -483,7 +479,7 @@ export default function OwnerDashboard() {
                           <div className="flex items-center space-x-3.5">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={prop.images?.[0] || '/placeholder.jpg'}
+                              src={prop.images?.[0] || null}
                               alt={prop.title}
                               className="w-12 h-12 rounded-lg object-cover border border-zinc-200/20"
                             />
