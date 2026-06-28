@@ -342,7 +342,7 @@ export default function OwnerDashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow flex flex-col md:flex-row gap-8 items-start">
       {/* Sidebar Navigation */}
-      <div className="w-full md:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 shadow-sm space-y-8 sticky top-24">
+      <div className="w-full md:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 shadow-sm space-y-8 md:sticky md:top-24">
         {/* User Card */}
         <div className="flex items-center space-x-3.5 pb-6 border-b border-zinc-100 dark:border-zinc-800">
           {session.user.image || session.user.photo ? (
@@ -441,7 +441,7 @@ export default function OwnerDashboard() {
       </div>
 
       {/* Main Workspace Content */}
-      <div className="flex-grow w-full bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition">
         {activeTab === 'properties' && (
           <div className="space-y-6">
             <div>
@@ -473,7 +473,7 @@ export default function OwnerDashboard() {
                     {properties.map((prop) => (
                       <tr
                         key={prop._id}
-                        className="border-b border-zinc-50 dark:border-zinc-850 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/10 transition"
+                        className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition"
                       >
                         <td className="py-4 pr-4">
                           <div className="flex items-center space-x-3.5">
