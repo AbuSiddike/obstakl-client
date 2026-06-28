@@ -133,15 +133,12 @@ export default function AdminDashboard() {
             u.id === userId || u._id === userId ? { ...u, role: newRole } : u
           )
         );
+      } else {
+        toast.error(res.message || 'Failed to update user role.');
       }
     } catch (err) {
-      console.error(err);
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.id === userId || u._id === userId ? { ...u, role: newRole } : u
-        )
-      );
-      toast.error(`User role updated to ${newRole} (Simulated).`);
+      console.error('Role change failed', err);
+      toast.error('Failed to update user role. Please try again.');
     }
   };
 
@@ -157,15 +154,12 @@ export default function AdminDashboard() {
             p._id === propertyId ? { ...p, status: 'Approved' } : p
           )
         );
+      } else {
+        toast.error(res.message || 'Failed to approve property.');
       }
     } catch (err) {
-      console.error(err);
-      setProperties((prev) =>
-        prev.map((p) =>
-          p._id === propertyId ? { ...p, status: 'Approved' } : p
-        )
-      );
-      toast.success('Property listing approved (Simulated).');
+      console.error('Property approval failed', err);
+      toast.error('Failed to approve property. Please try again.');
     }
   };
 
@@ -194,19 +188,12 @@ export default function AdminDashboard() {
         );
         setRejectingProperty(null);
         setRejectionFeedback('');
+      } else {
+        toast.error(res.message || 'Failed to reject property.');
       }
     } catch (err) {
-      console.error(err);
-      setProperties((prev) =>
-        prev.map((p) =>
-          p._id === rejectingProperty._id
-            ? { ...p, status: 'Rejected', rejectionFeedback }
-            : p
-        )
-      );
-      toast.success('Property listing rejected (Simulated).');
-      setRejectingProperty(null);
-      setRejectionFeedback('');
+      console.error('Property rejection failed', err);
+      toast.error('Failed to reject property. Please try again.');
     } finally {
       setSubmittingRejection(false);
     }
@@ -223,7 +210,7 @@ export default function AdminDashboard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow flex flex-col md:flex-row gap-8 items-start">
       {/* Sidebar Navigation */}
-      <div className="w-full md:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 shadow-sm space-y-8 sticky top-24">
+      <div className="w-full md:w-64 flex-shrink-0 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 shadow-sm space-y-8 md:sticky md:top-24">
         {/* User Card */}
         <div className="flex items-center space-x-3.5 pb-6 border-b border-zinc-100 dark:border-zinc-800">
           <div className="w-11 h-11 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold text-base shadow-md shadow-indigo-600/20">
@@ -292,7 +279,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Main Workspace */}
-      <div className="flex-grow w-full bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div className="flex-grow w-full min-w-0 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 sm:p-8 shadow-sm">
         {/* Manage Users Workspace */}
         {activeTab === 'users' && (
           <div className="space-y-6">
@@ -319,7 +306,7 @@ export default function AdminDashboard() {
                   {users.map((u) => (
                     <tr
                       key={u.id || u._id}
-                      className="border-b border-zinc-50 dark:border-zinc-850 hover:bg-zinc-50/50 dark:hover:bg-zinc-850/20 transition"
+                      className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition"
                     >
                       <td className="py-4 font-bold text-zinc-900 dark:text-white">
                         {u.name}
@@ -397,7 +384,7 @@ export default function AdminDashboard() {
                     {properties.map((prop) => (
                       <tr
                         key={prop._id}
-                        className="border-b border-zinc-50 dark:border-zinc-850 hover:bg-zinc-50/50 dark:hover:bg-zinc-850/20 transition"
+                        className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition"
                       >
                         <td className="py-4 pr-4">
                           <div className="flex items-center space-x-3.5">
@@ -423,10 +410,10 @@ export default function AdminDashboard() {
                             </div>
                           </div>
                         </td>
-                        <td className="py-4 text-zinc-550 font-semibold">
+                        <td className="py-4 text-zinc-500 font-semibold">
                           {prop.owner?.name || 'N/A'}
                         </td>
-                        <td className="py-4 font-bold text-indigo-650 dark:text-indigo-400">
+                        <td className="py-4 font-bold text-indigo-600 dark:text-indigo-400">
                           ${prop.rent}{' '}
                           <span className="text-[10px] text-zinc-400">
                             / mo
@@ -512,7 +499,7 @@ export default function AdminDashboard() {
                     {bookings.map((booking) => (
                       <tr
                         key={booking._id}
-                        className="border-b border-zinc-50 dark:border-zinc-850 hover:bg-zinc-50/50 dark:hover:bg-zinc-850/20 transition"
+                        className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition"
                       >
                         <td className="py-4 font-bold text-zinc-900 dark:text-white">
                           {getPropertyTitle(booking)}
@@ -582,7 +569,7 @@ export default function AdminDashboard() {
               </div>
             ) : (
               <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
-                <table className="w-full min-w-[640px] md:min-w-0 table-fixed text-left text-sm border-collapse">
+                <table className="w-full min-w-[760px] text-left text-sm border-collapse">
                   <colgroup>
                     <col className="w-[16%]" />
                     <col className="w-[24%]" />
@@ -605,7 +592,7 @@ export default function AdminDashboard() {
                     {transactions.map((tx) => (
                       <tr
                         key={tx._id}
-                        className="border-b border-zinc-50 dark:border-zinc-850 hover:bg-zinc-50/50 dark:hover:bg-zinc-850/20 transition"
+                        className="border-b border-zinc-50 dark:border-zinc-800 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition"
                       >
                         <td className="py-4 font-bold text-zinc-900 dark:text-white">
                           <code className="text-xs bg-zinc-50 dark:bg-zinc-800 px-2 py-1 rounded-lg truncate inline-block max-w-full">
