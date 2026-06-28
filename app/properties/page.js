@@ -144,7 +144,7 @@ function PropertiesContent() {
         {/* Filters Sidebar */}
         <form
           onSubmit={handleApplyFilters}
-          className="lg:col-span-1 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 space-y-6 shadow-sm sticky top-24"
+          className="lg:col-span-1 bg-white dark:bg-zinc-900 border border-zinc-200/50 dark:border-zinc-800 rounded-3xl p-6 space-y-6 shadow-sm lg:sticky lg:top-24"
         >
           <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800">
             <h3 className="font-bold text-zinc-900 dark:text-white flex items-center space-x-2">
