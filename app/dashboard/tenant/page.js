@@ -21,6 +21,7 @@ import {
   FiMapPin,
   FiBriefcase,
   FiChevronRight,
+  FiStar,
   FiArrowRight,
 } from 'react-icons/fi';
 import Link from 'next/link';
@@ -424,7 +425,7 @@ export default function TenantDashboard() {
                     <div className="space-y-2">
                       <div className="flex space-x-1">
                         {[...Array(rev.rating)].map((_, i) => (
-                          <FiCalendar
+                          <FiStar
                             key={i}
                             className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
                           />
