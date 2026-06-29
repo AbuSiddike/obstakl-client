@@ -37,10 +37,13 @@ export default function Login() {
         callbackURL: '/dashboard',
       });
 
-      if (res) {
-        toast.success('Signed in successfully!');
-        router.push('/dashboard');
+      if (res?.error) {
+        toast.error(res.error.message || 'Invalid email or password.');
+        return;
       }
+
+      toast.success('Signed in successfully!');
+      router.push('/dashboard');
     } catch (err) {
       console.error(err);
       toast.error('An unexpected error occurred.');
